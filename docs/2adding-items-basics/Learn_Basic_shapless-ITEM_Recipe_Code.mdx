@@ -1,0 +1,81 @@
+---
+sidebar_position: 1
+---
+
+# Learn basic shapless crafting
+
+In a main code/script file we will start with basics of coding. **The main line of code that all scripts need when creating a new recipe or changing a recipe** is a `ServerEvents.recipes(event => {` This line tells KubeJS: **“Run this code when Minecraft is loading or updating recipes.”**:
+
+
+
+## Breaking it down PART 1
+
+- `ServerEvents` → This is a built-in KubeJS system. It means **“We are listening for server-side game events.”**
+## The server is the part of Minecraft that controls gameplay logic like:
+- recipes
+- blocks
+- items
+- loot tables
+
+
+
+
+
+## Breaking it down PART 2
+- `.recipes` → This tells KubeJS exactly what event we care about
+- “We only want to modify crafting recipes.”
+
+**So this line means**
+“When Minecraft is handling recipes…”
+
+
+## Create your first ITEM recipe (in server_scripts) NeoForge 1.21.1
+**This is EXAMPLE 1**
+(example is in neoforge 1.21.1)
+
+Create a file at `:\Instances\Mod pack\kubejs\server_scripts`:
+
+```jsx title="grass.js"
+ServerEvents.recipes(event => {
+  event.shapeless('minecraft:grass_block', [
+    'minecraft:dirt',
+    'minecraft:dirt'
+  ])
+})
+```
+
+
+
+
+## Create your first ITEM recipe (in server_scripts) FORGE 1.20.1
+**This is EXAMPLE 2**
+(example is in forge 1.20.1)
+
+Create a file at `:\Instances\Mod pack\kubejs\server_scripts`:
+
+```jsx title="grass.js"
+ServerEvents.recipes(event => {
+  event.shapeless('minecraft:grass_block', [
+    'minecraft:dirt',
+    'minecraft:dirt'
+  ])
+})
+```
+
+
+## Create your first ITEM recipe (in server_scripts) Fabric 1.20.1
+**This is EXAMPLE 3**
+(example is in fabric 1.20.1)
+
+***WARNING Server_Script dont show up until after the first world is loaded in this version of fabric***
+
+Create a file at `:\Instances\Mod pack\kubejs\server_scripts`:
+
+```jsx title="grass.js"
+ServerEvents.recipes(event => {
+  event.shapeless('minecraft:grass_block', [
+    'minecraft:dirt',
+    'minecraft:dirt'
+  ])
+})
+```
