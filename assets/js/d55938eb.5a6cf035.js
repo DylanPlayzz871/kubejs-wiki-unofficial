@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkmy_kubejs_site=globalThis.webpackChunkmy_kubejs_site||[]).push([[4],{4965(e){e.exports=JSON.parse('{"metadata":{"permalink":"/kubejs-wiki-unofficial/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

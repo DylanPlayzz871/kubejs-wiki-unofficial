@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkmy_kubejs_site=globalThis.webpackChunkmy_kubejs_site||[]).push([[903],{1912(s){s.exports=JSON.parse('{"blogBasePath":"/kubejs-wiki-unofficial/blog","blogTitle":"Blog","authorsListPath":"/kubejs-wiki-unofficial/blog/authors"}')}}]);
