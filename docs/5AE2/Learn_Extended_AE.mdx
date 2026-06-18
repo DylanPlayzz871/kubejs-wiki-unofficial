@@ -1,0 +1,221 @@
+---
+sidebar_position: 2
+---
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+# learn ExtendedAE forge 1.20.X
+
+
+<div style={{height: '50px'}}></div>
+
+## Learn to use Kubejs to work with ExtendedAE
+
+
+Lets show you how to use *kubejs* to add 
+your own custom recipes with ExtendedAE this section will include
+the `circuit_cutter`, the `Extended_inscribers`, and `extended_charger`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `circuit_cutter`
+
+For creating stuff for the `circuit_cutter` You want to figure out what
+ you want as your input and your output.
+For this one we are going 
+for `apple` and `water` as our 
+input and a `golden_apple` as the output
+
+![circuit_cutter](/img/ae2/circuit_cutter.png)
+
+
+
+*This recipe is a little more different than what most are used to
+ExtendedAE has there own way of coding in liquid, items and so on.
+This one specifically want a `fluid_input` instead of it just being `"fluid": minecraft:water`
+
+Same thing for items. Normally you would see `"item" :minecraft:apple` but in here 
+they want it to be `"item_input":` So just keep that in mind later when adding more code*
+
+
+
+```jsx title="Extended_ae_slicer.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "expatternprovider:circuit_cutter",
+        "fluid_input": {
+            "amount": 100,
+            "ingredient": {
+                "fluid": "minecraft:water"
+            }
+        },
+        "item_input": {
+            "amount": 1,
+            "ingredient": {
+                "item": "minecraft:apple"
+            }
+        },
+        "output": {
+            "count": 1,
+            "item": "minecraft:golden_apple"
+        }
+    })
+})
+
+```
+<CodeFeedback nodeId="extended-slicer" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `Extended_Charger and Extended_inscriber`
+
+So if you have seen the LearnAE2 part of this page you will already know what the 
+inscriber and charger is. The cool thing about the extendedAE addon is it uses
+the recipes from the base `inscriber` and `charger` so you dont have to do Anything
+different!!
+
+![farmers delight Pot recipe](/img/ae2/charger.png)
+![farmers delight Pot recipe](/img/ae2/inscriber_JEI.png)
+
+
+
+```jsx title="inscriber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "ae2:inscriber",
+  "ingredients": {
+    "bottom": {
+      "item": "ae2:printed_logic_processor"
+    },
+    "middle": {
+      "item": "minecraft:apple"
+    },
+    "top": {
+      "item": "ae2:printed_calculation_processor"
+    }
+  },
+  "mode": "press",
+  "result": {
+    "item": "minecraft:golden_apple"
+
+
+  }
+  })
+})
+
+```
+<CodeFeedback nodeId="extended-inscriber" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```jsx title="charger.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "ae2:charger",
+  "ingredient": {
+    "item": "minecraft:apple"
+  },
+  "result": {
+    "item": "minecraft:golden_apple"
+  }
+  })
+})
+
+```
+<CodeFeedback nodeId="extended-charger" />

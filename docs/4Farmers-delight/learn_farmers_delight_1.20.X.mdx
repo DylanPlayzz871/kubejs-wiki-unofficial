@@ -1,0 +1,284 @@
+---
+sidebar_position: 2
+---
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+# learn farmers delight 1.20.X
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Learn to use Kubejs to work with farmers delight
+
+
+Lets show you how to use *kubejs* to add your own custom recipes with the Farmers delight blocks, pots, and more!
+
+
+## Creating a Recipe for the POT
+
+**forge 1.20.1**
+
+For creating stuff for the `Pot` You want to figure out what you want as your input and your output.
+For this one we are going for `Carrots` `Potatos` and a `bowl` as our input and a `diamond` as the output
+
+![farmers delight Pot recipe](/img/f/diamond_using_farmerDelight.png)
+
+
+
+```jsx title="cooking_on_a_pot.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "farmersdelight:cooking",
+        "recipe_book_tab": "meals",
+        "ingredients": [
+            {
+                "item": "minecraft:potato"
+            },
+            {
+                "item": "minecraft:carrot"
+            },
+            {
+                "item": "minecraft:bowl"
+            }
+        ],
+        "result": {
+            "item": "minecraft:diamond"
+        },
+        "experience": 1.0,
+        "cookingtime": 200
+    })
+})
+
+```
+
+
+
+<CodeFeedback nodeId="cooking-pot" />
+
+
+
+<div style={{height: '150px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the STOVE
+
+**forge 1.20.1**
+
+For creating stuff with the `stove` you want your input and output, for this example we have
+a `apple` going in and a `golden_apple` coming out. The Stove in `Farmers Delight` does not have its own
+recipe functions, it works off of the base minecraft `campfire` recipe. Anything you can cook on a 
+campfire can be cooked on the stove. This means you need to do `minecraft:campfire_cooking` to register the recipe
+
+![farmers delight Pot recipe](/img/f/stove.png)
+![farmers delight Pot recipe](/img/f/stove_JEI.png)
+
+
+```jsx title="cooking_on_a_stove.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "minecraft:campfire_cooking",
+        "ingredient": {
+            "item": "minecraft:apple"
+        },
+        "result": "minecraft:golden_apple",
+        "experience": 0.35,
+        "cookingtime": 50
+    })
+})
+
+```
+<CodeFeedback nodeId="cooking-stove" />
+
+<div style={{height: '150px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the cutting board
+
+**forge 1.20.1**
+
+For creating stuff with the `cutting board` you want your input and output,
+ for this example we have
+a `coal` going in & `diamonds, and sand` coming out. This biggest part here is to use
+`"type": "farmersdelight:cutting"` to register your recipe for the cutting board
+
+![farmers delight Pot recipe](/img/f/cutting_board_JEI.png)
+
+```jsx title="cutting_board.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:sand"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip",
+  "tool": [
+    {
+      "type": "farmersdelight:tool_action",
+      "action": "axe_strip"
+    },
+    {
+      "tag": "minecraft:axes"
+    }
+]
+    })
+})
+
+```
+<CodeFeedback nodeId="cutting-board" />
+
+
+
+<div style={{height: '150px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the Skillet
+
+**forge 1.20.1**
+
+For creating stuff with the `Skillet` is the `EXACT` same as the `STOVE` you have to add nothing
+else to your scrip, if it works on the stove it works with the skillet
+
+![skillet](/img/f/skillet_JEI.png)
+<CodeFeedback nodeId="skillet-cooking" />
+
+<div style={{height: '100px'}}></div>

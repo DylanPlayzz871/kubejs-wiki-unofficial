@@ -2,7 +2,10 @@
 sidebar_position: 6
 ---
 
-# Learn to format your files
+
+
+# Format Files
+## Learn to format your files
 
 **`There is a LOT of things in kubejs that NEED to be in the right folders. You could have all your code correct
 and nothing will work. Things like `**
@@ -21,7 +24,7 @@ in CurseForge but it may differ from launcher to launcher
 
 
 **`Lets start by actually going into your modpack in CurseForge and right next to the play button you will see 3 little dots`**
-![My Logo](/img/open_mod_files.png)
+![Open mod file](/img/format/open_mod_files.png)
 
 **`Now click on open folder`**
 
@@ -30,13 +33,13 @@ in CurseForge but it may differ from launcher to launcher
 
 **`Now that we are in your modpack directory you need to find a folder called Kubejs, that is where ALL of your work will be done`**
 
-![My Logo](/img/file_layout_beginning.png)
+![layout](/img/format/file_layout_beginning.png)
 
 
 **`Inside the Kubejs folder you will see a few different folders and a ReadMe file, the few files you will more than likely
 be worried about will be the server_scripts and startup_scripts. This will be where most of your code will be ran, made, or messed with`**
 
-![My Logo](/img/inside_kubejs_folder.png)
+![inside kubejs](/img/format/inside_kubejs_folder.png)
 
 **`Both the Server_Script 
 and the startup_scripts folder will 
@@ -45,8 +48,8 @@ In different version they may be names something different
 but in this example they are called main.js in the startup_scripts 
 and main.js in the server_scripts but are sometimes names example.js`**
 
-![My Logo](/img/inside_startup_script.png)
-![My Logo](/img/inside_server_script.png)
+![inside startup script](/img/format/inside_startup_script.png)
+![inside server script](/img/format/inside_server_script.png)
 
 
 ## Creating a new .js script
@@ -58,14 +61,29 @@ but when you are ready to create a NEW file it is very simple.**
 
 
 **Start out by right clicking anywhere in the folder and go down to NEW**
-![Inside Server Scripts](/img/new_file_doc.jpg)
+![Inside Server Scripts](/img/format/new_file_doc.jpg)
 
 **then click on new text document**
 
 **Once you get a new file, rename it to something relative to what you are changing and change the .txt to .js**
-![Inside Server Scripts](/img/new_text_doc.jpg)
-![Inside Server Scripts](/img/renaming_doc.jpg)
+![Inside Server Scripts](/img/format/new_text_doc.jpg)
+![Inside Server Scripts](/img/format/renaming_doc.jpg)
 
 **When clicking ENTER it will ask you if you are sure you would like to change the file type from .txt to .js, just click yes**
 
-![Inside Server Scripts](/img/selecting_yes.jpg)
+![Inside Server Scripts](/img/format/selecting_yes.jpg)
+
+
+## Item name and namespaces
+
+When coding in kubejs or any coding related things for minecraft you are going to need to know the namespaces of items, blocks, machines, fluids, etc.
+
+To easier find them when you are in game Press `F3 + H` to enable advanced tool tips in game and Now when you hover over any
+block, item, fluid, etc you will see a new name show up looking like `minecraft:oak_log` instead of just `oak_log`
+
+these are the names you will be using in code to tell the game what items you are wanting to use.
+
+Examples are here of before and after the advanced tool tips are enabled
+
+![before tool tips](/img/format/before_tooltip.png)
+![after tool tips](/img/format/after_tooltips.png)

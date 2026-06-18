@@ -1,0 +1,66 @@
+.feedbackContainer {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  text-align: center;
+}
+
+.reactions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.likeBtn, .dislikeBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s;
+}
+
+.likeBtn:hover, .dislikeBtn:hover {
+  transform: scale(1.05);
+}
+
+.likeBtn {
+  background: #e6f7e6;
+  color: #166534;
+}
+
+.dislikeBtn {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.count {
+  font-weight: bold;
+}
+
+
+.votedMessage {
+  margin-top: 1rem;
+  color: var(--ifm-color-primary);
+  font-size: 0.95rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Highlight the active vote */
+.likeBtn.active {
+  background: #bbf7d0 !important;
+  border: 2px solid #166534;
+  transform: scale(1.05);
+}
+
+.dislikeBtn.active {
+  background: #fecaca !important;
+  border: 2px solid #991b1b;
+  transform: scale(1.05);
+}

@@ -2,6 +2,8 @@
 sidebar_position: 4
 ---
 
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
 # Removing Recipes
 
 Removing unwanted recipes is very common in modpacks. All removal scripts go in the **`kubejs/server_scripts/`** folder.
@@ -21,8 +23,13 @@ event.remove
 ```
 
 
+<div style={{height: '90px'}}></div>
+<div style={{height: '90px'}}></div>
+
 ## Removing outputs of crafting items
 **`Example 1, Removing the output of a item being crafted`**
+
+![My Logo](/img/remove/diamond_pickaxe_removed.png)
 
 ```js
 // File: server_scripts/remove_recipes.js
@@ -32,11 +39,54 @@ ServerEvents.recipes(event => {
 })
 ```
 
-![My Logo](/img/diamond_pickaxe_removed.png)
+<CodeFeedback nodeId="removing-the-output" />
+
+
+
+
+<div style={{height: '180px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 **`Example 2, same as example 1 just with a different item`**
+
+![My Logo](/img/remove/removed_iron_ingot_crafting.png)
 
 ```js
 // File: server_scripts/remove_recipes.js
@@ -46,22 +96,79 @@ ServerEvents.recipes(event => {
 })
 ```
 
-![My Logo](/img/removed_iron_ingot_crafting.png)
+<CodeFeedback nodeId="removing-output-2" />
+
+
+
+
+<div style={{height: '180px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Removing ALL recipes in ANY mod
 
 **`Example 3, This is how you can remove the outputs or recipes of EVERY item, block, or tool that is in a specific mod. This example shows you it working with the Create mod.`**
 
+![My Logo](/img/remove/remove_entire_mod.png)
+
+
 ```js
 // File: server_scripts/remove_recipes.js
 ServerEvents.recipes(event => {
-    // Remove all ways to craft a Diamond Pickaxe
-    event.remove({ output: 'minecraft:iron_ingot' })
+    // Remove ALL recipes from the Create mod
+    event.remove({ mod: "create" })
 })
 ```
 
-![My Logo](/img/remove_entire_mod.png)
+
+<CodeFeedback nodeId="removing-all-recipes-of-a-mod" />
+
+
+
+
+<div style={{height: '180px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,6 +176,10 @@ ServerEvents.recipes(event => {
 ## Removing recipes with specific Inputs/Ingredients
 
 **`Example 4, This is how you remove a recipe if it uses a specific item or material as its input or ingredient, This example shows me removing any recipe that uses oak planks as an ingredient, so every block or item in the game that uses oak planks no longer have a crafting recipe`**
+
+
+![My Logo](/img/remove/remove_based_off_ingredients.png)
+
 
 ```js
 // File: server_scripts/remove_recipes.js
@@ -78,7 +189,36 @@ ServerEvents.recipes(event => {
 })
 ```
 
-![My Logo](/img/remove_based_off_ingredients.png)
+<CodeFeedback nodeId="removes-output-based-on-input-used" />
+
+
+
+
+<div style={{height: '180px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -86,6 +226,10 @@ ServerEvents.recipes(event => {
 
 **`Example 5, This specific code shows you how to remove the output recipes of a entire block. in this case it shows you that if you do this with the campfire
 then you will no longer be allowed to put anything food wise on the camp fire and cook it. It completely removes cooking on the campfire `**
+
+
+![My Logo](/img/remove/remove_campfire_ALL.png)
+
 
 ```js
 // File: server_scripts/remove_recipes.js
@@ -95,14 +239,64 @@ ServerEvents.recipes(event => {
 
 })
 ```
+<CodeFeedback nodeId="remove-camp-fire-cooking-rec" />
 
-![My Logo](/img/remove_campfire_ALL.png)
 
 
-## Removing SPECIF types of output for a specific block (the fuirnace outputs and blast furnace outputs)
+
+<div style={{height: '180px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Removing SPECIF types of output for a specific block (the furnace outputs and blast furnace outputs)
 
 **`Example 5, this example shows that you can remove specific outputs also and not just ALL outputs. this shows that you can disable or remove
 smelting a ore or raw ore like raw iron in a furnace but still have it working in ONLY the blast furnace AND this also works for the camp fire`**
+
+
+![My Logo](/img/remove/blast_furnace_working.png), ![My Logo](/img/remove/furnace_not_working.png)
 
 ```js
 // File: server_scripts/remove_recipes.js
@@ -115,4 +309,10 @@ smelting a ore or raw ore like raw iron in a furnace but still have it working i
     
 ```
 
-![My Logo](/img/blast_furnace_working.png), ![My Logo](/img/furnace_not_working.png)
+<CodeFeedback nodeId="removing-blast-furnace" />
+
+
+
+
+<div style={{height: '180px'}}></div>
+

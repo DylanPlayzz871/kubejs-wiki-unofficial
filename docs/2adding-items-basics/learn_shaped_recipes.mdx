@@ -2,6 +2,10 @@
 sidebar_position: 6
 ---
 
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+
 # learn basic SHAPED recipes
 
 
@@ -18,6 +22,7 @@ ServerEvents.recipes(event => {
 
 ```
 
+<CodeFeedback nodeId="shaped" />
 
 
 
@@ -56,6 +61,10 @@ the code part that looks like
 There is many different ways you can craft things using chaped crafting, here are three more examples of some fun things to doc
 
 
+<div style={{height: '90px'}}></div>
+
+![My Logo](/img/shaped/vertical_crafting.png)
+
 ```js id="8p9v1a"
 // Vertical Recipe Example
 ServerEvents.recipes(event => {
@@ -69,16 +78,18 @@ ServerEvents.recipes(event => {
 })
 ```
 
-
-![My Logo](/img/vertical_crafting.png)
-
+<CodeFeedback nodeId="shaped-vertical" />
 
 
 
 
 
+<div style={{height: '90px'}}></div>
 
 
+
+
+![My Logo](/img/shaped/corner_crafting.png)
 
 ```js id="8p9v1a"
 // Corner Recipe Example
@@ -93,13 +104,19 @@ ServerEvents.recipes(event => {
 })
 ```
 
-
-
-![My Logo](/img/corner_crafting.png)
-
+<CodeFeedback nodeId="shaped-corner" />
 
 
 
+
+
+<div style={{height: '90px'}}></div>
+
+
+
+
+
+![My Logo](/img/shaped/square_crafting.png)
 
 
 ```js id="8p9v1a"
@@ -115,5 +132,4 @@ ServerEvents.recipes(event => {
 })
 ```
 
-
-![My Logo](/img/square_crafting.png)
+<CodeFeedback nodeId="shaped-full" />

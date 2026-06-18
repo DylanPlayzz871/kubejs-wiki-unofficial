@@ -1,0 +1,846 @@
+---
+sidebar_position: 2
+---
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+# Learn Create Modifications forge 1.20.X
+
+
+<div style={{height: '50px'}}></div>
+
+## Learn default create mod MODIFICATIONS
+
+
+There is a few things in the default **Create** mod you can modify with **kubjs** and its all very starter friendly. Lets look at some examples of things EVERYONE changes
+
+
+## Machines you can modify
+
+- mechanical crafters
+<div style={{height: '5px'}}></div>
+- Millstone
+<div style={{height: '5px'}}></div>
+- Deployers Including
+  - sequenced assembly
+  - deploying
+  - stripping
+  - automative crafting
+<div style={{height: '50px'}}></div>
+
+- Mechanical Saw
+  - wood cutting
+  - crafting
+  - stone cutting
+  - glass cutting
+  - crafting
+  <div style={{height: '5px'}}></div>
+
+- Item Drain
+  - Draining items into fluids and items
+
+<div style={{height: '5px'}}></div>
+
+- Mechanical Mixer 
+  - automated brewing
+  - automatic shapless crafting
+  - Muxing (crafting)
+  - Including heated and non heated recipes
+<div style={{height: '5px'}}></div>
+
+- Mechanical Press
+  - Automated Packing (ITEMS - shaped crafting)
+  - Compacting (auto crafting W Items/Fluids) 
+  - Pressing (things like) 
+    -iron sheets
+    - dirt into path blocks
+    - etc.
+
+<div style={{height: '5px'}}></div>
+
+- Encased Fans Including
+  - haunting (soul campfire and soul fire)
+  - smoking (camp fire and fire)
+  - washing
+  - blasting
+<div style={{height: '5px'}}></div>
+- and sand paper
+
+
+
+
+## Examples of each
+
+This may look like a LOT of reading, 
+but i promis this will be worth it. 
+We will show you an example of everything here. 
+There should also be different versions of each example of the code to work on 
+multiple different versions sense loads of things change between FORGE, NEOFORGE, and fabric. 
+So be sure to reach wha version this code is for before trying it.
+
+<div style={{height: '90px'}}></div>
+
+## MECHANICAL CRAFTERS
+
+**forge 1.20.1**
+
+![mechanical crafter example](/img/c/MECHANICAL_CRAFTER.png)
+![mechanical crafter JEI example](/img/c/Mechanical_craftingJEI.png)
+
+*In this example we show you how to make a very unfair recipe, but fun none the less. 
+You need to fill up a 4X4 set of mechanical crafters to make 1 single oak plank. Very annoying but this is a great recipe*
+
+```jsx title="mechanical_crafters.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "create:mechanical_crafting",
+        pattern: [
+            "AAAA",
+            "AAAA",
+            "AAAA",
+            "AAAA"
+        ],
+        key: {
+            A: {
+                item: "minecraft:oak_log"
+            }
+        },
+        result: {
+            item: "minecraft:oak_planks",
+            count: 1
+        }
+    })
+})
+```
+
+<CodeFeedback nodeId="mechanical-crafter" />
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '90px'}}></div>
+
+## Millstone
+
+**forge 1.20.1**
+
+![millestone example](/img/c/millestone.png)
+![millestone JEI example](/img/c/millestoneJEI.png)
+
+*this recipe shows you how to have a input to the millestone turn into something as the output. this one specifically shows you putting 1 log into the millestone and getting a plank out as the output*
+
+
+
+```jsx title="Millstone.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_log"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:oak_planks",
+      "chance": 1
+    }
+  ],
+  "processingTime": 1
+    })
+})
+```
+
+<CodeFeedback nodeId="millestone" />
+
+
+
+
+
+<div style={{height: '90px'}}></div>
+
+## Deploying
+
+**forge 1.20.1**
+
+![deploying example](/img/c/deploying.png)
+![deploying JEI example](/img/c/deployingJEI.png)
+
+*this recipe shows you how to have 1 item as the input (deployer holding) and another item on the belt and how to get a output from all of that. This shows you how to take a Log being held, deploying it onto another Log and getting a plank as the output*
+
+
+
+```jsx title="deploying.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:deploying",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_log"
+            },
+            {
+                "item": "minecraft:oak_log"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:oak_planks",
+                "count": 1
+            }
+        ]
+    })
+})
+```
+
+<CodeFeedback nodeId="deplaying" />
+
+
+
+
+
+
+
+<div style={{height: '90px'}}></div>
+
+
+## Mechanical Saw
+
+**forge 1.20.1**
+
+![saw cutting example](/img/c/saw_cutting.png)
+![saw cutting JEI example](/img/c/mechanical_sawJEI.png)
+
+*This recipe shows you how to take a input such as oak_logs and making a output of stone. The output and input can be most items and blocks you want*
+
+
+
+```jsx title="Mechanical_saw.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:cutting",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_log"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:stone",
+                "count": 1
+            }
+        ],
+        "processingTime": 50
+    })
+})
+```
+
+
+
+<CodeFeedback nodeId="mechanical-saw" />
+
+
+
+
+
+
+<div style={{height: '90px'}}></div>
+
+
+## Draining
+
+**forge 1.20.1**
+
+![draining example](/img/c/Draining.png)
+![draining JEI example](/img/c/drainingJEI.png)
+
+
+*This recipe will show you how to take a item `IN` to the drain and output two things, 
+You absolutly have to have a fluid output. if you want 2 items the second one has to be a item, 
+not another fluid. The drain can only hold up to one fluid at a time. 
+Just make sure you 100% of the time have some sort of 
+`fluid` coming out as a result or you will crash your game and the recipe wont work*
+
+
+
+```jsx title="drain.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "create:emptying",
+        ingredients: [
+            {
+                item: "minecraft:wheat"
+            }
+        ],
+        results: [
+            {
+                item: "minecraft:diamond"
+            },
+            {
+                fluid: "minecraft:water",
+                amount: 1000
+            }
+        ]
+    })
+})
+```
+
+
+
+<CodeFeedback nodeId="drainging" />
+```
+
+
+<div style={{height: '200px'}}></div>
+
+## Mechanical Mixing (`Non heated`)
+
+**forge 1.20.1**
+
+![normal mixing](/img/c/mechanical_mixing.png)
+![normal mixing](/img/c/mixingJEI.png)
+
+
+*This recipe will show you how to take a item INTO a basin and mix it with the mechanical mixer `non heated` for a specific output,
+this one shows you how to put in `oak_logs` and get `oak_planks` as a result*
+
+
+
+```jsx title="mixing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:mixing",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_log"
+            },
+            {
+                "item": "minecraft:oak_log"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:oak_planks",
+                "count": 1
+            }
+        ],
+        "processingTime": 100
+    })
+})
+```
+
+<CodeFeedback nodeId="mixing" />
+
+
+
+
+
+
+
+<div style={{height: '200px'}}></div>
+
+## Mechanical Mixing (`heated`)
+
+**forge 1.20.1**
+
+![heated mixing](/img/c/mixing_heated.png)
+![heated mixing](/img/c/heated_mixing_JEI.png)
+
+
+
+*This recipe will show you how to take a item INTO a basin and mix it with the mechanical mixer `heated` for a specific output,
+this one shows you how to put in `oak_planks` and get `netherrack` as a result*
+
+
+
+```jsx title="heated_mixing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:mixing",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_planks"
+            },
+            {
+                "item": "minecraft:oak_planks"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:netherrack",
+                "count": 1
+            }
+        ],
+        "processingTime": 100,
+        "heatRequirement": "heated"
+    })
+})
+```
+
+<CodeFeedback nodeId="mixing-heated" />
+
+
+
+
+<div style={{height: '200px'}}></div>
+
+## Mechanical Mixing (`SUPER heated`)
+
+**forge 1.20.1**
+
+![super heated](/img/c/mixing_super_heated.png)
+![super heated JEI ](/img/c/super_heated_JEI.png)
+
+
+
+*This recipe will show you how to take a item INTO a basin and mix it with the mechanical mixer `SUPER heated` for a specific output,
+this one shows you how to put in `oak_planks` and get `netherrack` as a result*
+
+
+
+```jsx title="super_heated_mixing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:mixing",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_planks"
+            },
+            {
+                "item": "minecraft:oak_planks"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:netherrack",
+                "count": 1
+            }
+        ],
+        "processingTime": 100,
+        "heatRequirement": "superheated"
+    })
+})
+```
+
+<CodeFeedback nodeId="mixing-super-heated" />
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '200px'}}></div>
+
+## Mechanical Mixing (`fluid + fluid to fluid mixing`)
+
+**forge 1.20.1**
+
+![super heated](/img/c/fluid_to_fluid.png)
+
+
+
+*This recipe will show you how to mix two different fluids into a different fluid as your `output`*
+
+
+
+```jsx title="fluid_to_fluid_mixing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:mixing",
+        "ingredients": [
+            {
+                "fluid": "minecraft:water",
+                "amount": 1000 //this is the amount of fluid in buckets, 1000 means 1000mb and 1000mb means 1 bucket. 500mb means half a bucket
+            },
+            {
+                "fluid": "create:chocolate",
+                "amount": 1000
+            }
+        ],
+        "results": [
+            {
+                "fluid": "create:honey",
+                "amount": 1000
+            }
+        ],
+        "processingTime": 100
+    })
+})
+```
+
+<CodeFeedback nodeId="fluid-to-fluid-mixing" />
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '200px'}}></div>
+
+## Mechanical Mixing (`fluid + Item to fluid mixing`)
+
+**forge 1.20.1**
+
+![super heated](/img/c/flud_and_item_to_fluid.png)
+
+*This recipe will show you how to mix a `fluid` and a `item` into a different fluid as your `output`*
+```jsx title="fluid_and_item_mixing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:mixing",
+        "ingredients": [
+            {
+                "fluid": "minecraft:water",
+                "amount": 1000
+            },
+            {
+                "item": "create:bar_of_chocolate"
+            }
+        ],
+        "results": [
+            {
+                "fluid": "create:honey",
+                "amount": 1000
+            }
+        ],
+        "processingTime": 100
+    })
+})
+```
+
+<CodeFeedback nodeId="fluid-and-item-to-fluid-mixing" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '200px'}}></div>
+
+## Encased fan
+
+*now its time to learn the one things that people LOVE and also get confused on. Encased Fans can be amazing to use for many different reasons
+BUT the name spacing for different types of things can confuse people. So here are a few recipe types you can do with these
+- haunting
+  - create:haunting
+- washing
+  - create:splashing
+- Smoking (Fan + Fire)
+  - create:smoking
+- Blasting (Fan + Lava)
+  - create:blasting
+
+
+<div style={{height: '100px'}}></div>
+
+## Haunting
+
+**forge 1.20.1**
+
+![Haunting 1](/img/c/haunting.png)
+![Haunting 2](/img/c/haunting_also.png)
+![haunting JEI ](/img/c/haunting_JEI.png)
+
+*This recipe will show you how to do `haunting` and this is by putting a soul fire or soul camp fire infront of the encased Fans
+and getting a output of some sort. this example shows `Oak_logs` going in and `oak_planks` coming out*
+
+
+
+```jsx title="haunting.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:haunting",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_log"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:oak_planks",
+                "count": 1
+            }
+        ]
+    })
+})
+```
+
+
+<CodeFeedback nodeId="haunting" />
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Smoking/cooking
+
+**forge 1.20.1**
+
+![Smoking 1](/img/c/smoking.png)
+![Smoking 2](/img/c/smoking_also.png)
+![Smoking JEI ](/img/c/SmokingJEU.png)
+
+*This recipe will show you how to do `smoking/cooking` and this is by putting a fire or camp fire infront of the encased Fans
+and getting a output of some sort. this example shows `Oak_logs` going in and `oak_planks` coming out*
+
+
+
+```jsx title="smoking.js"
+ServerEvents.recipes(event => {
+    event.smoking(
+        'minecraft:oak_planks',
+        'minecraft:oak_log'
+    )
+})
+```
+
+
+
+
+<CodeFeedback nodeId="smoking" />
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Washing
+
+**forge 1.20.1**
+
+![washing](/img/c/washing.png)
+![washing JEI ](/img/c/WashingJEI.png)
+
+*This recipe will show you how to do `Washing` and this is by putting water infront of the encased Fans
+and getting a output of some sort. this example shows `Oak_logs` going in and `oak_planks` coming out*
+
+
+
+```jsx title="washing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:splashing",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_log"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:oak_planks",
+                "count": 1
+            }
+        ]
+    })
+})
+```
+
+
+
+
+
+
+<CodeFeedback nodeId="washing" />
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Blasting
+
+**forge 1.20.1**
+
+![blasting](/img/c/blasting1.png)
+![blasting JEI](/img/c/blasting_JEI.png)
+
+*This recipe will show you how to do `blasting` and this is by putting lava infront of the encased Fans
+and getting a output of some sort. this example shows `smooth_stone` going in and `oak_planks` coming out*
+
+
+
+```jsx title="bulk_blasting.js"
+ServerEvents.recipes(event => {
+    event.blasting(
+        'minecraft:oak_planks',
+        'minecraft:smooth_stone'
+    )
+})
+```
+
+
+<CodeFeedback nodeId="bulk-blasting" />
+
+
+
+
+<div style={{height: '300px'}}></div>
+
+## Sand Paper (Sanding)
+
+**forge 1.20.1**
+
+![sandpaper](/img/c/sandpaper.png)
+
+*This recipe will show you how to do `sanding` and this is rubbing something against sandpaper to get a output
+In this example you see `oak_logs` being sanded into `oak_planks`*
+
+
+
+```jsx title="bulk_blasting.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_log"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:oak_planks"
+    }
+  ]
+    })
+})
+```
+
+
+<CodeFeedback nodeId="sandpaper-polishing" />
+
+
+
+
+
+
+
+<div style={{height: '300px'}}></div>
+
+## Crushin Wheels
+
+**forge 1.20.1**
+
+![crushing wheels](/img/c/crushing_wheels.png)
+![crushing wheels](/img/c/crushing_wheels_also.png)
+
+*This recipe will show you how to do `crushing` and this when you have two crushing wheels spinning inwards very quick and put
+two items in and get some items out. This is typically used for automatic ore creation or duplication*
+
+
+
+```jsx title="bulk_blasting.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "create:crushing",
+        "ingredients": [
+            {
+                "item": "minecraft:oak_log"
+            }
+        ],
+        "results": [
+            {
+                "item": "minecraft:oak_planks",
+                "count": 4
+            },
+            {
+                "item": "minecraft:oak_planks",
+                "count": 2,
+                "chance": 0.5
+            }
+        ],
+        "processingTime": 150
+    })
+})
+```
+
+<CodeFeedback nodeId="crushing-wheels" />

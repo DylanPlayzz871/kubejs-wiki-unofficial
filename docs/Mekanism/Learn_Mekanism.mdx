@@ -1,0 +1,1139 @@
+---
+sidebar_position: 2
+---
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+# Learn Mekanism forge 1.20.X
+
+
+<div style={{height: '50px'}}></div>
+
+## Learn to use Kubejs to work with Mekanism (no addons) 
+**(check next section for addon custom code)**
+
+
+Lets show you how to use *kubejs* to add 
+your own custom recipes with Mekanism this section will include
+the `Energized Smelter`, `enriching_factory`
+
+
+## Creating a Recipe for the `Energized Smelter`
+
+For creating stuff for the `Energized Smelter` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` as our input and a `golden_apple` as
+the output
+
+*The Smelting factory types all run off of whats already in minecraft
+If it can smelt in a furnace it can smelt in the factories. So nothing to crazy. Just use a normal smelting recipe in your code*
+
+![Smelting facotries](/img/mek/smelting.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Energized Smelter.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        "type": "minecraft:smelting",
+        "ingredient": {
+            "item": "minecraft:apple"
+        },
+        "result": "minecraft:golden_apple",
+        "experience": 0.35,
+    })
+})
+
+
+```
+<CodeFeedback nodeId="energized-smelter" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `enrichment Chamber`
+
+For creating stuff for the `enrichment Chamber` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` as our input and a `golden_apple` as
+the output
+
+![Smelting facotries](/img/mek/enriching.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="enrichment Chamber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:enriching",
+"input":{"ingredient":
+    {"item":"minecraft:apple"}},
+"output":
+    {"item":"minecraft:golden_apple"}
+    })
+})
+
+
+```
+<CodeFeedback nodeId="enrichment-chamber" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `crusher`
+
+For creating stuff for the `crusher` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` as our input and a `golden_apple` as
+the output
+
+![crusher](/img/mek/crushing_factory.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="crusher.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:crushing",
+"input":
+{"ingredient":{"item":"minecraft:apple"}},
+"output":
+{"count":2,
+    "item":"minecraft:golden_apple"}
+    })
+})
+
+
+```
+<CodeFeedback nodeId="mek-crusher" />
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Combiner`
+
+For creating stuff for the `Combiner` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` and `Gold nugget` as our input and a `golden_apple` as
+the output
+
+![Smelting facotries](/img/mek/combiner.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Combiner.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:combining",
+"extraInput":
+{"ingredient":
+    {"item":"minecraft:gold_nugget"}},
+    "mainInput":
+    {"ingredient":
+        {"item":"minecraft:apple"}},
+        "output":
+        {"item":"minecraft:golden_apple"}
+    })
+})
+```
+<CodeFeedback nodeId="mek-combining" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Osmium Compressor`
+
+For creating stuff for the `Osmium Compressor` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` and `nuclear_waste` as our input and a `golden_apple` as
+the output
+
+![Comressor Factory](/img/mek/compressing.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Osmium Compressor.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:compressing",
+"chemicalInput":
+{"amount":1,
+    "gas":"mekanism:nuclear_waste"},
+"itemInput":{"ingredient":
+    {"item":"minecraft:apple"}},
+    "output":
+        {"item":"minecraft:golden_apple"}
+    })
+})
+```
+<CodeFeedback nodeId="mek-Osmium-compressor" />
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Energized Smelter`
+
+For creating stuff for the `Energized Smelter` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` and `Power` as our input and a `golden_apple` as
+the output
+
+![Energizing](/img/mek/Energized.png)
+
+
+<div style={{height: '100px'}}></div>
+
+This uses the default smelting code used in minecraft. if its smeltable, its usable in this block. so make a normal smelting recipe (the first recipe on this page)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Metalluric infuser`
+
+For creating stuff for the `Metalluric_infuser` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` `bio` as our input and a `golden_apple` as
+the output
+
+![Metalluric_infuser Factory](/img/mek/metalluric_infusing.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="metallurgic_infusing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:metallurgic_infusing",
+"chemicalInput":
+{"amount":40,
+    "tag":"mekanism:bio"},
+    "itemInput":
+    {"ingredient":
+        {"item":"minecraft:apple"}},
+        "output":
+        {"count":4,
+            "item":"minecraft:golden_apple"}
+        })
+    })
+```
+<CodeFeedback nodeId="mek-metallurgic_infusing" />
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Purification Chamber`
+
+For creating stuff for the `Purification Chamber` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples`, `oxygen`, and `Flint` as our input and a `golden_apple` as
+the output
+
+![Purification Chamber Factory](/img/mek/purification_chamber.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="purification_chamber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:purifying",
+"chemicalInput":
+    {"amount":2,
+"gas":
+    "mekanism:oxygen"},
+"itemInput":
+    {"ingredient":
+        {"item":"minecraft:apple"}},
+        "output":
+        {"count":18,
+        "item":
+        "minecraft:golden_apple"}
+    })
+})
+```
+<CodeFeedback nodeId="mek-purification_chamber" />
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Chemical Injection Chamber`
+
+For creating stuff for `Chemical Injection Chamber` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` and `water vapor` as our input and a `golden_apple` as
+the output
+
+![Chemical Injection Chamber](/img/mek/chemical_injecting_chamber.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Chemical Injection Chamber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:injecting",
+"chemicalInput":
+{"amount":1,
+    "tag":"mekanism:water_vapor"},
+"itemInput":
+{"ingredient":
+    {"item":"minecraft:apple"}},
+    "output":{"item":"minecraft:golden_apple"}
+    })
+})
+```
+<CodeFeedback nodeId="mek-injecting" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Precision Sawmille`
+
+For creating stuff for `Precision Sawmille` You want 
+to figure out what you want as your input and your output.
+For this one we are going 
+for `apples` input and a `golden_apple` as
+the output with a chance of extra `apples`
+
+![Precision Sawmille](/img/mek/sawmille.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Precision Sawmille.js"
+ServerEvents.recipes(event => {
+    event.custom({
+"type":"mekanism:sawing",
+"input":
+{"ingredient":
+    {"item":"minecraft:apple"}},
+    "mainOutput":{"count":6,
+        "item":"minecraft:golden_apple"},
+        "secondaryChance":0.25,
+        "secondaryOutput":{"item":"minecraft:golden_apple"}
+    })
+})
+```
+<CodeFeedback nodeId="mek-sawing" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Rotary Condensentrator`
+
+For creating stuff for `Rotary Condensentrator` You want 
+to figure out what Gas you want as your input, and what fluid you want as your output. For this one i have 
+the gas uranium_hexafluoride as my input and minecraft:water as my output. If you switch the two around as input and output 
+the game will automatically change the recipe to work as Decondensentrating instead!!
+
+![Rotary Condensentrator](/img/mek/Rotary_condensentrator.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Rotary Condensentrator.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:rotary",
+
+        gasInput: {
+            amount: 1,
+            gas: "mekanism:uranium_hexafluoride"
+        },
+
+        fluidOutput: {
+            amount: 1,
+            fluid: "minecraft:water"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-Condensentrator" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Electrolytic seperator`
+
+For creating stuff for `Electrolytic seperator` You want 
+to figure out what Fluid you want as your input, and what fluid or gas you want as your output. For this one i have 
+the fluid minecraft:water as my input and gas:chlorine and gas Oxygen as my output.
+
+![Rotary Condensentrator](/img/mek/Electrolytic_seperator.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Electrolytic_seperator.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "mekanism:separating",
+  "input": {
+    "amount": 2,
+    "tag": "minecraft:water"
+  },
+  "leftGasOutput": {
+    "amount": 2,
+    "gas": "mekanism:chlorine"
+  },
+  "rightGasOutput": {
+    "amount": 1,
+    "gas": "mekanism:oxygen"
+  }
+    })
+})
+```
+<CodeFeedback nodeId="mek-Electrolytic_seperator" />
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Chemical dissolution chamber`
+
+For creating stuff for `Chemical dissolution chamber` You want 
+to figure out what gas you want as your main input. Mine is `sulfuric asid`, and the item input is `iron ore`. And the output here will be a custom output of 
+`slurry` this one is completely custom from Mekanism 
+
+![Chemical dissolution chamber](/img/mek/Chemical_dissolution_chamber.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Chemical_dissolution_chamber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "mekanism:dissolution",
+  "gasInput": {
+    "amount": 1,
+    "gas": "mekanism:sulfuric_acid"
+  },
+  "itemInput": {
+    "ingredient": {
+      "item": "minecraft:iron_ore"
+    }
+  },
+  "output": {
+    "amount": 1000,
+    "chemicalType": "slurry",
+    "slurry": "mekanism:dirty_copper"
+  }
+})
+})
+```
+<CodeFeedback nodeId="mek-Chemical_dissolution_chamber" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Pigment Extractor`
+
+For creating stuff for `Pigment Extractor` You want 
+to figure out what item you want as your main input. Mine is `minecraft:golden_apple`. And the output here will be a pigment from mekanism this one will be `yellow`
+
+![Chemical dissolution chamber](/img/mek/Pigment_Extractor.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Pigment_Extractor.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:pigment_extracting",
+        input: {
+            ingredient: {
+                item: "minecraft:golden_apple"
+            }
+        },
+        output: {
+            amount: 64,
+            pigment: "mekanism:yellow"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-pigment_extracting" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Painting machine`
+
+For creating stuff for `Painting machine` You want 
+to figure out what item you want as your main input. Mine is `minecraft:apple`. and my second input will be the yellow pigment. And the output here will be a golden_apple
+
+![Chemical dissolution chamber](/img/mek/Painting_Machine.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="painting_machine.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:painting",
+        chemicalInput: {
+            amount: 256,
+            pigment: "mekanism:yellow"
+        },
+        itemInput: {
+            ingredient: {
+                item: "minecraft:apple"
+            }
+        },
+        output: {
+            item: "minecraft:golden_apple"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-painting_machine" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Pigment Mixing`
+
+For creating stuff for `Pigment Mixing` You want 
+to figure out what 2 pigments you want as your main inputs. Mine is `black` and `yellow`. And the output here will be a green. Yeah i know it makes no sense but hey, thats the fun of custom code
+
+![Pigment_mixing](/img/mek/Pigment_mixing.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Pigment_mixing.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:pigment_mixing",
+        leftInput: {
+            amount: 1,
+            pigment: "mekanism:black"
+        },
+        rightInput: {
+            amount: 4,
+            pigment: "mekanism:yellow"
+        },
+        output: {
+            amount: 5,
+            pigment: "mekanism:green"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-pigment_mixing" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Chemical Washer`
+
+For creating stuff for `Chemical Washer` You want 
+to figure out what chemical you want as your main inputs. 
+And then use water as your other main input. And the output here will be a different chemical Its up to you what all you put in here. 
+Any chemical to be washed, and any fluid as the cleaning supply. and any chemical as the output. 
+
+![Pigment_mixing](/img/mek/Chemical_Washer.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Chemical_Washer.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:washing",
+        fluidInput: {
+            amount: 5,
+            tag: "minecraft:water"
+        },
+        slurryInput: {
+            amount: 1,
+            slurry: "mekanism:dirty_iron"
+        },
+        output: {
+            amount: 1,
+            slurry: "mekanism:clean_copper"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-washing" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Chemical Crystallizer`
+
+For creating stuff for `Chemical Crystallizer` You want 
+to figure out what chemical you want as your main input. 
+and then what item you want as your output. My chemical here is `dirty Osmium` and my output item is `golden_apple`. 
+
+![Pigment_mixing](/img/mek/Chrystal_Crystallizer.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Chemical_Crystallizer.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:crystallizing",
+        chemicalType: "slurry",
+        input: {
+            amount: 200,
+            slurry: "mekanism:dirty_osmium"
+        },
+        output: {
+            item: "minecraft:golden_apple"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-Chemical_Crystallizer" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Pressurized Reaction Chamber`
+
+For creating stuff for `Pressurized Reaction Chamber` You want a fluid as your first main input mine here is `lava`
+and then you want a gas of some sort, mine here is `Polonium`. After that you want a item input and here it is a `Apple` and the output for me is `golden_apple`
+
+![Pigment_mixing](/img/mek/Pressurized+Reaction_Chamber.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Pressurized+Reaction_Chamber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:reaction",
+        duration: 100,
+        fluidInput: {
+            amount: 1000,
+            tag: "minecraft:lava"
+        },
+        gasInput: {
+            amount: 1000,
+            gas: "mekanism:polonium"
+        },
+        itemInput: {
+            ingredient: {
+                item: "minecraft:apple"
+            }
+        },
+        gasOutput: {
+            amount: 1000,
+            gas: "mekanism:spent_nuclear_waste"
+        },
+        itemOutput: {
+            item: "minecraft:golden_apple"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-Pressurized_Reaction_chamber" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Isotopic Centrifuge`
+
+For creating stuff for `Isotopic Centrifuge` is just putting gas in and getting gas out `(DOES NOT SUPPORT LIQUIDS OR SLURRY)`
+
+![Pigment_mixing](/img/mek/Isotopic_Centrifuge.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Isotopic_Centrifuge.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:centrifuging",
+        input: {
+            amount: 10,
+            gas: "mekanism:fissile_fuel"
+        },
+        output: {
+            amount: 1,
+            gas: "mekanism:plutonium"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-Isotopic_Centrifuge" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Chemical Oxidizer`
+
+For creating stuff for `Chemical Oxidizer` is just putting a item in
+and getting a gas out
+![Pigment_mixing](/img/mek/Chemical_Oxidizer.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Chemical_Oxidizer.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:oxidizing",
+        input: {
+            ingredient: {
+                item: "minecraft:golden_apple"
+            }
+        },
+        output: {
+            amount: 1000,
+            gas: "mekanism:sulfur_dioxide"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-Chemical_Oxidizer" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+## Creating a Recipe for the `Chemical Infuser`
+
+For creating stuff for `Chemical Infuser` is just putting two Chemicals
+in and getting a chemical out.
+![Pigment_mixing](/img/mek/Chemical_Infuser.png)
+
+
+<div style={{height: '100px'}}></div>
+
+```jsx title="Chemical_Infuser.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "mekanism:chemical_infusing",
+        leftInput: {
+            amount: 1,
+            gas: "mekanism:hydrogen"
+        },
+        rightInput: {
+            amount: 1,
+            gas: "mekanism:chlorine"
+        },
+        output: {
+            amount: 1,
+            gas: "mekanism:nuclear_waste"
+        }
+    })
+})
+```
+<CodeFeedback nodeId="mek-chemical_infusing" />

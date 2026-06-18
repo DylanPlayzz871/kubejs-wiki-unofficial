@@ -1,0 +1,164 @@
+---
+sidebar_position: 2
+---
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+# learn AE2 (no addons) forge 1.20.X
+
+
+<div style={{height: '50px'}}></div>
+
+## Learn to use Kubejs to work with AE2 with NO addons 
+**(check next section for addon custom code)**
+
+
+Lets show you how to use *kubejs* to add 
+your own custom recipes with AE2 this section will include
+the `inscriber` and the `charger`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `Inscriber`
+
+For creating stuff for the `inscriber` You want to figure out what you want as your input and your output.
+For this one we are going for `printed_calculation_circuit` `apples` and a `printed_logic_circuit` as our input and a `golden_apple` as the output
+
+![farmers delight Pot recipe](/img/ae2/inscriber_JEI.png)
+
+*This one is a little more differnt then most recipes you have been learning lately through out many kubejs tutorials
+Most code dont have a `bottom` `top` and `middle` section you have to chose from. But with this block specifically 
+them locations just mean what slot you are wanting. So make sure to really check your recipes when changing them around
+The biggest thing is here is the `"type": "ae2:inscriber"`*
+
+
+
+```jsx title="inscriber.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "ae2:inscriber",
+  "ingredients": {
+    "bottom": {
+      "item": "ae2:printed_logic_processor"
+    },
+    "middle": {
+      "item": "minecraft:apple"
+    },
+    "top": {
+      "item": "ae2:printed_calculation_processor"
+    }
+  },
+  "mode": "press",
+  "result": {
+    "item": "minecraft:golden_apple"
+
+
+  }
+  })
+})
+
+```
+<CodeFeedback nodeId="inscriber-res" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '100px'}}></div>
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `Charger`
+
+For creating stuff for the `Charger` You want to figure out what you want as your input and your output.
+For this one we are going for a `apple` and a `golden_apple` as the output
+
+![farmers delight Pot recipe](/img/ae2/charger.png)
+
+*This one is a little more simple. Just a input and a output. The biggest thing is here is the `"type": "ae2:charger"`*
+
+
+```jsx title="charger.js"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "ae2:charger",
+  "ingredient": {
+    "item": "minecraft:apple"
+  },
+  "result": {
+    "item": "minecraft:golden_apple"
+  }
+  })
+})
+
+```
+<CodeFeedback nodeId="charger-res" />
