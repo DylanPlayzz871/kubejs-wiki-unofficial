@@ -11,9 +11,8 @@ jobs:
     steps:
       - name: Send Discord Notification
         run: |
-          echo "Sending to Discord..."
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\": \"🚀 **Test Message** from GitHub Actions\\nCommit: ${{ github.event.head_commit.message }}\"}" \
+               -d "{\"username\": \"KubeJS Wiki Bot\", \"content\": \"🚀 **Wiki Has Been Updated!**\\n\\n**Changes:**\\n\`\`\`\\n${{ github.event.head_commit.message }}\`\`\`\\n\\n🔗 [View Live Site](https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/)\\n👤 Updated by: @${{ github.actor }}\"}" \
                ${{ secrets.DISCORD_WEBHOOK }}
         shell: bash
