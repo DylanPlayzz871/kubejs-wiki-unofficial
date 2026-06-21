@@ -13,5 +13,17 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"username\": \"KubeJS Wiki Bot\", \"content\": \"🚀 **Wiki Has Been Updated!**\\n\\n**Commit:**\\n\`\`\`${{ github.event.head_commit.message }}\`\`\`\\n\\n🔗 [View Live Site](https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/)\\n👤 Updated by: @${{ github.actor }}\"}" \
+               -d '{
+                 "username": "KubeJS Wiki Bot",
+                 "embeds": [{
+                   "title": "🚀 Wiki Has Been Updated!",
+                   "description": "```'${{ github.event.head_commit.message }}'```",
+                   "color": 7506394,
+                   "url": "https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/",
+                   "timestamp": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'",
+                   "footer": {
+                     "text": "Updated by @${{ github.actor }}"
+                   }
+                 }]
+               }' \
                ${{ secrets.DISCORD_WEBHOOK }}
