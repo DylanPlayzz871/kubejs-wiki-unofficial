@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  increment
+import React, { useState, useEffect } from 'react';
+import { 
+  doc, 
+  onSnapshot, 
+  setDoc, 
+  increment,
+  getDoc 
 } from "firebase/firestore";
 
 import { db } from '@site/src/utils/firebase';
@@ -18,99 +18,68 @@ export default function CodeFeedback({ nodeId }) {
   const [loading, setLoading] = useState(true);
 
   const userId = getUserId();
-  const ref = doc(db, "feedback", nodeId);
+  const feedbackRef = doc(db, "feedback", nodeId);
+  const userVoteRef = doc(db, "feedback", nodeId, "votes", userId);
 
-  // LOAD DATA
+  // Real-time Live Updates
   useEffect(() => {
-    const load = async () => {
-      const snap = await getDoc(ref);
-
-      if (!snap.exists()) {
-        await setDoc(ref, {
-          likes: 0,
-          dislikes: 0
-        });
-      } else {
+    // Listen to main feedback counts
+    const unsubscribeFeedback = onSnapshot(feedbackRef, (snap) => {
+      if (snap.exists()) {
         const data = snap.data();
         setLikes(data.likes || 0);
         setDislikes(data.dislikes || 0);
       }
+    });
 
-      // load user vote
-      const voteSnap = await getDoc(doc(db, "feedback", nodeId, "votes", userId));
-
-      if (voteSnap.exists()) {
-        setUserVote(voteSnap.data().vote);
-      }
-
+    // Listen to user's vote
+    const unsubscribeVote = onSnapshot(userVoteRef, (snap) => {
+      setUserVote(snap.exists() ? snap.data().vote : null);
       setLoading(false);
-    };
+    });
 
-    load();
+    return () => {
+      unsubscribeFeedback();
+      unsubscribeVote();
+    };
   }, [nodeId]);
 
-  // VOTE FUNCTION (FIXED)
   const vote = async (type) => {
-    const voteRef = doc(db, "feedback", nodeId, "votes", userId);
-    const snap = await getDoc(voteRef);
+    try {
+      const currentVoteSnap = await getDoc(userVoteRef);
+      const previousVote = currentVoteSnap.exists() ? currentVoteSnap.data().vote : null;
 
-    const previousVote = snap.exists() ? snap.data().vote : null;
+      if (previousVote === type) return;
 
-    // If same vote, do nothing
-    if (previousVote === type) return;
+      const updates = {};
 
-    const updates = {};
+      // Remove previous vote
+      if (previousVote === "like") updates.likes = increment(-1);
+      if (previousVote === "dislike") updates.dislikes = increment(-1);
 
-    // remove previous vote
-    if (previousVote === "like") {
-      updates.likes = increment(-1);
+      // Add new vote
+      if (type === "like") updates.likes = increment(1);
+      if (type === "dislike") updates.dislikes = increment(1);
+
+      if (Object.keys(updates).length > 0) {
+        await setDoc(feedbackRef, updates, { merge: true });
+      }
+
+      // Save user vote
+      await setDoc(userVoteRef, { vote: type });
+      setUserVote(type);
+    } catch (error) {
+      console.error("Vote failed:", error);
     }
-    if (previousVote === "dislike") {
-      updates.dislikes = increment(-1);
-    }
-
-    // add new vote
-    if (type === "like") {
-      updates.likes = increment(1);
-    }
-    if (type === "dislike") {
-      updates.dislikes = increment(1);
-    }
-
-    // IMPORTANT: only update if needed
-    if (Object.keys(updates).length > 0) {
-      await updateDoc(ref, updates);
-    }
-
-    // store user vote
-    await setDoc(voteRef, { vote: type });
-
-    // update UI safely
-    setLikes(prev => {
-      let value = prev;
-      if (previousVote === "like") value--;
-      if (type === "like") value++;
-      return value;
-    });
-
-    setDislikes(prev => {
-      let value = prev;
-      if (previousVote === "dislike") value--;
-      if (type === "dislike") value++;
-      return value;
-    });
-
-    setUserVote(type);
   };
 
   if (loading) {
-    return <div className={styles.feedbackContainer}>Loading...</div>;
+    return <div className={styles.feedbackContainer}>Loading feedback...</div>;
   }
 
   return (
     <div className={styles.feedbackContainer}>
       <div className={styles.reactions}>
-
         <button
           onClick={() => vote("like")}
           className={`${styles.likeBtn} ${userVote === "like" ? styles.active : ""}`}
@@ -124,11 +93,10 @@ export default function CodeFeedback({ nodeId }) {
         >
           👎 Dislike <span className={styles.count}>{dislikes}</span>
         </button>
-
       </div>
 
       <p className={styles.votedMessage}>
-        Your vote is saved globally per device.
+        Live updates enabled • Your vote is saved globally
       </p>
     </div>
   );

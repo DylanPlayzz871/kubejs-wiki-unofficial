@@ -1,9 +1,13 @@
 export function getUserId() {
-  let id = localStorage.getItem("wiki-user-id");
+  if (typeof window === "undefined") {
+    return "ssr-user"; // server-safe fallback
+  }
+
+  let id = localStorage.getItem("kubejs-user-id");
 
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem("wiki-user-id", id);
+    localStorage.setItem("kubejs-user-id", id);
   }
 
   return id;
