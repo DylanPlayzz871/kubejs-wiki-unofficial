@@ -1,0 +1,24 @@
+name: Discord Wiki Updates
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Send Discord Notification
+        uses: Ilshidur/discord-webhook-action@v1.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          username: "KubeJS Wiki Bot"
+          content: |
+            🚀 **Wiki Has Been Updated!**
+
+            **Commit Message:**
+            ${{ github.event.head_commit.message }}
