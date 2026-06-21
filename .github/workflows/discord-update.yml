@@ -9,21 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Send Discord Notification
-        uses: D3v01d/dsc-action@v2.0.0
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: |
-            🚀 **Wiki Has Been Updated!**
-
-            **Commit Message:**
-            ```
-            ${{ github.event.head_commit.message }}
-            ```
-
-            🔗 [View Live Site](https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/)
-
-            👤 Updated by: @${{ github.actor }}
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "{\"username\": \"KubeJS Wiki Bot\", \"content\": \"🚀 **Wiki Has Been Updated!**\\n\\n**Commit:**\\n\`\`\`${{ github.event.head_commit.message }}\`\`\`\\n\\n🔗 [View Live Site](https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/)\\n👤 Updated by: @${{ github.actor }}\"}" \
+               ${{ secrets.DISCORD_WEBHOOK }}
