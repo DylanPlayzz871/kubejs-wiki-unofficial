@@ -16,6 +16,6 @@ jobs:
           curl -H "Content-Type: application/json" \
                -X POST \
                --data "$(printf '{"username":"KubeJS Wiki Bot","content":"🚀 **Wiki Has Been Updated!**\n\n**Changes:**\n```%s```\n\n🔗 https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/\n👤 Updated by: @${{ github.actor }}"}'
-               "$MESSAGE")"\
+               "$MESSAGE")" \
                ${{ secrets.DISCORD_WEBHOOK }}
         shell: bash
