@@ -6,8 +6,6 @@ on:
 
 jobs:
   notify-discord:
-
-    
     runs-on: ubuntu-latest
 
     steps:
@@ -23,4 +21,10 @@ jobs:
             🚀 **Wiki Has Been Updated!**
 
             **Commit Message:**
+            ```
             ${{ github.event.head_commit.message }}
+            ```
+
+            🔗 [View Live Site](https://DylanPlayzz871.github.io/kubejs-wiki-unofficial/)
+
+            👤 Updated by: @${{ github.actor }}
