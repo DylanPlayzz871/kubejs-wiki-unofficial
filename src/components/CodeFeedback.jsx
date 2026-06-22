@@ -96,7 +96,7 @@ export default function CodeFeedback({ nodeId }) {
       </div>
 
       <p className={styles.votedMessage}>
-        Live updates enabled • Your vote is saved globally
+        
       </p>
     </div>
   );

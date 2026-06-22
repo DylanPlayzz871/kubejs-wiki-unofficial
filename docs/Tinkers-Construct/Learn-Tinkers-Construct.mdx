@@ -1,0 +1,469 @@
+---
+sidebar_position: 2
+---
+
+import CodeFeedback from '@site/src/components/CodeFeedback';
+
+## Tinkers Construct KubeJS Overview
+
+This page contains working KubeJS examples for modifying Tinkers'
+ Construct recipes in Minecraft 1.20.1. All examples are tested and 
+ ready to use as templates for custom modpacks.
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+## Requirements
+
+- Minecraft 1.20.1
+- Forge 47.4.10
+- Tinkers' Construct 3.11.2.166
+- KubeJS installed and working
+
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+
+
+## Notes
+
+- Some recipe types may change between Tinkers versions
+- Not all recipes work in all modpack setups
+- Always test recipes in-game after adding them
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+### Common Fields (Melting / General Recipe Reference)
+
+
+
+| Field        | Description |
+| ------------ | ----------- |
+| ingredient   | The item being used in the recipe. |
+| fluid        | The fluid produced from the recipe. |
+| amount       | How much fluid is created. |
+| temperature  | Required heat level to process the item. |
+| time         | How long the melting process takes. |
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+### Common Material Amounts
+
+
+
+| Amount | Type  | Meaning |
+| ------ | ----- | ------- |
+| 90     | Nugget | Small metal amount |
+| 100    | Gem    | Gem-sized material |
+| 144    | Ingot  | Standard metal unit |
+| 1296   | Block  | Full storage block |
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+### Common Modifier IDs
+
+
+| Modifier ID          | Effect / Purpose |
+| -------------------- | ---------------- |
+| tconstruct:luck      | Increases loot / fortune-like effects |
+| tconstruct:haste     | Increases mining speed |
+| tconstruct:silky     | Silk touch-style harvesting |
+| tconstruct:diamond   | Increases durability and stats |
+| tconstruct:emerald   | Boosts durability scaling |
+| tconstruct:overslime | Adds slime-based durability system |
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+### Common Cast
+
+| Cast ID                | Description                              | Typical Output |
+| ---------------------- | ---------------------------------------- | --------------- |
+| tconstruct:ingot_cast  | Used for casting solid metal ingots.     | Iron Ingot, Gold Ingot |
+| tconstruct:nugget_cast | Used for casting small metal pieces.     | Iron Nugget, Gold Nugget |
+| tconstruct:gem_cast    | Used for casting gem materials.          | Diamond, Emerald |
+| tconstruct:plate_cast  | Used for casting flat metal plates.      | Iron Plate, Gold Plate |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+## Creating a Recipe for the `Melter / Smeltery`
+
+For creating stuff for `Melter / Smeltery` is just taking an item and melting it down into a fluid. 
+Melting Recipes are used to determine what items can be melted, what fluid they produce, how much fluid is created, 
+the temperature required to melt the item, and how long the melting process takes.
+This is commonly used for creating custom molten materials, recycling items into fluids,
+ or integrating custom items into the Tinkers' Construct smelting system.
+
+![Melter_Smeltery](/img/tconstruct/Melter_Smeltery.png)
+
+```jsx title="Melter_Smeltery.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "tconstruct:melting",
+        ingredient: {
+            item: "minecraft:golden_apple"
+        },
+        result: {
+            fluid: "minecraft:water",
+            amount: 1000
+        },
+        temperature: 300,
+        time: 50
+    })
+})
+```
+
+<CodeFeedback nodeId="tconstruct-Melter_Smeltery" />
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `Casting Table`
+
+For creating stuff for `Casting Table` is just pouring a fluid onto a cast or item to create a new item. 
+Casting Table Recipes are commonly used for creating tool parts, ingots, nuggets, 
+gems, and other small items from molten fluids. These recipes allow you to define the required fluid, 
+the cast being used, whether the cast is consumed during the process, 
+and how long the item takes to cool before it can be collected.
+
+![Casting\_Table](/img/tconstruct/Casting_Table.png)
+
+```jsx title="Casting_Table.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "tconstruct:casting_table",
+        cast: {
+            item: "minecraft:stick"
+        },
+        cast_consumed: false,
+        fluid: {
+            fluid: "minecraft:water",
+            amount: 1000
+        },
+        result: "minecraft:golden_apple",
+        cooling_time: 60
+    })
+})
+```
+
+<CodeFeedback nodeId="tconstruct-Casting_Table" />
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `Casting Basin`
+
+For creating stuff for `Casting Basin` is just pouring a fluid into a basin to create a larger item or block.
+ Casting Basin Recipes are typically used for creating storage blocks, metal blocks, glass blocks,
+  and other large casted objects. These recipes allow you to define the fluid being used, the resulting item, 
+  and the cooling time required before the finished item can be removed from the basin.
+
+![Casting\_Basin](/img/tconstruct/Casting_Basin.png)
+
+```jsx title="Casting_Basin.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "tconstruct:casting_basin",
+        fluid: {
+            fluid: "minecraft:water",
+            amount: 1000
+        },
+        result: {
+            item: "minecraft:golden_apple"
+        },
+        cooling_time: 100
+    })
+})
+```
+
+<CodeFeedback nodeId="tconstruct-Casting_Basin" />
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Creating a Recipe for the `Alloyer`
+
+For creating stuff for `Alloyer` is just combining 
+two or more fluids together to create an entirely new fluid. Alloy Recipes are used to create
+ molten alloys by mixing specific fluids in defined amounts. This system is commonly used for creating 
+ advanced materials and custom metals that cannot be obtained through normal melting recipes. The resulting 
+ fluid can then be used in casting recipes or other Tinkers' Construct processing systems.
+
+![Alloyer](/img/tconstruct/Alloyer.png)
+
+```jsx title="Alloyer.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "tconstruct:alloy",
+        inputs: [
+            {
+                fluid: "minecraft:water",
+                amount: 500
+            },
+            {
+                fluid: "minecraft:lava",
+                amount: 500
+            }
+        ],
+        result: {
+            fluid: "minecraft:obsidian",
+            amount: 1000
+        }
+    })
+})
+```
+
+<CodeFeedback nodeId="tconstruct-Alloyer" />
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+
+
+
+## Creating a Recipe for the `PART BUILDER/Material Recipe`
+
+For creating stuff for `Material Recipe` is just taking an item and assigning it a material value that can be used by Tinkers'
+ Construct. Material Recipes are used to tell Tinkers' Construct what items can act as a material and how much of that material
+  they provide when used in recipes. This is useful when adding custom materials or allowing existing items to be used as material sources.
+
+![Material_Recipe1](/img/tconstruct/material_recipe1.png)
+![Material_Recipe2](/img/tconstruct/material_recipe2.png)
+
+```jsx title="Material_Recipe.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "tconstruct:material",
+        ingredient: {
+            item: "minecraft:golden_apple"
+        },
+        material: "tconstruct:wood",
+        value: 1,
+        needed: 1
+    })
+})
+```
+
+<CodeFeedback nodeId="tconstruct-Material_Recipe" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style={{height: '50px'}}></div>
+
+## Creating a Recipe for the `Modifier Recipe`
+
+For creating stuff for `Modifier Recipe` is just taking an 
+item and applying a modifier to a compatible Tinkers' Construct tool.
+ Modifier Recipes are used to add upgrades and abilities to tools, weapons,
+  and armor. In this example, using a Golden Apple will apply the Luck modifier to
+   any tool that can accept modifiers. This allows pack developers to create custom upgrade paths,
+    progression systems, or entirely new ways of improving Tinkers' Construct equipment.
+
+![Modifier_Recipe](/img/tconstruct/luck.png)
+
+```jsx title="Modifier_Recipe.js"
+ServerEvents.recipes(event => {
+    event.custom({
+        type: "tconstruct:modifier",
+        tools: {
+            tag: "tconstruct:modifiable"
+        },
+        inputs: [
+            {
+                item: "minecraft:golden_apple"
+            }
+        ],
+        result: "tconstruct:luck"
+    })
+})
+```
+
+<CodeFeedback nodeId="tconstruct-Modifier_Recipe" />
+
+<div style={{height: '50px'}}></div>
