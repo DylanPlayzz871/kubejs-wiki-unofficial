@@ -1,0 +1,189 @@
+---
+sidebar_position: 6
+---
+
+
+
+# Format Files
+## Learn to format your files
+
+**`There is a LOT of things in kubejs that NEED to be in the right folders. You could have all your code correct
+and nothing will work. Things like `**
+
+- recipe scripts
+- actual game function changes
+- functions on player join
+- command creation
+- etc
+
+
+**`Lets start off by learing where you can find your mod files and kubejs files`**
+
+The biggest thing you need to know is how to find your game files. For me im going to show this
+in CurseForge but it may differ from launcher to launcher
+
+
+**`Lets start by actually going into your modpack in CurseForge and right next to the play button you will see 3 little dots`**
+![Open mod file](/img/format/open_mod_files.png)
+
+**`Now click on open folder`**
+
+
+## Enter your mod file folder
+
+**`Now that we are in your modpack directory you need to find a folder called Kubejs, that is where ALL of your work will be done`**
+
+![layout](/img/format/file_layout_beginning.png)
+
+
+**`Inside the Kubejs folder you will see a few different folders and a ReadMe file, the few files you will more than likely
+be worried about will be the server_scripts and startup_scripts. This will be where most of your code will be ran, made, or messed with`**
+
+![inside kubejs](/img/format/inside_kubejs_folder.png)
+
+**`Both the Server_Script 
+and the startup_scripts folder will 
+usually have a file in them by default. 
+In different version they may be names something different 
+but in this example they are called main.js in the startup_scripts 
+and main.js in the server_scripts but are sometimes names example.js`**
+
+![inside startup script](/img/format/inside_startup_script.png)
+![inside server script](/img/format/inside_server_script.png)
+
+
+## Creating a new .js script
+
+**To start making your own file or script, it is very simple. You can start out by using the example one that is created for you at first launch
+but when you are ready to create a NEW file it is very simple.**
+
+**Start out by going into one of the two folders that we spoke about before (startup_scripts/Server_scripts)**
+
+
+**Start out by right clicking anywhere in the folder and go down to NEW**
+![Inside Server Scripts](/img/format/new_file_doc.jpg)
+
+**then click on new text document**
+
+**Once you get a new file, rename it to something relative to what you are changing and change the .txt to .js**
+![Inside Server Scripts](/img/format/new_text_doc.jpg)
+![Inside Server Scripts](/img/format/renaming_doc.jpg)
+
+**When clicking ENTER it will ask you if you are sure you would like to change the file type from .txt to .js, just click yes**
+
+![Inside Server Scripts](/img/format/selecting_yes.jpg)
+
+
+## Item name and namespaces
+
+When coding in kubejs or any coding related things for minecraft you are going to need to know the namespaces of items, blocks, machines, fluids, etc.
+
+To easier find them when you are in game Press `F3 + H` to enable advanced tool tips in game and Now when you hover over any
+block, item, fluid, etc you will see a new name show up looking like `minecraft:oak_log` instead of just `oak_log`
+
+these are the names you will be using in code to tell the game what items you are wanting to use.
+
+Examples are here of before and after the advanced tool tips are enabled
+
+![before tool tips](/img/format/before_tooltip.png)
+![after tool tips](/img/format/after_tooltips.png)
+
+
+## Learn to transform source code to js code
+
+When taking pretty much ANY source code from most mods and changing them into .js files or scripts 
+you want to always start your script with
+
+
+```jsx title="code_Starter"
+ServerEvents.recipes(event => {
+    event.custom({
+```
+
+
+This will start your script properly and tell kubejs that this is a recipe script. 
+It just registers your script into minecraft and kubejs when the game is loaded or reloaded.
+
+And typically when closing out your script you want it to end like this 
+
+```jsx title="code_closer"
+    })
+})
+```
+
+# Here is a refference to what we are going to do for you to practice this.
+
+We are using the create mod and we are going to add a recipe for BLASTING raw zinc into a zinc ingot
+
+NOW that already exist and we are not going over how to remove a recipe here. only how to make one from source code.
+
+
+Here is what the source code looks like in create mod for blasting raw zinc into zinc ingots
+
+```jsx title="source_Code"
+
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/zinc"
+  },
+  "result": "create:zinc_ingot",
+  "experience": 0.1,
+  "cookingtime": 100
+}
+
+
+```
+
+
+First thing to do is take out the 
+
+```jsx title="outter_Brackets"
+{ } 
+```
+
+around the source code. It will end up looking like this 
+
+```jsx title="source_Code_Without_Outter_Brackets"
+
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/zinc"
+  },
+  "result": "create:zinc_ingot",
+  "experience": 0.1,
+  "cookingtime": 100
+
+```
+
+Now we are going to add 
+```jsx title="code_Starter"
+ServerEvents.recipes(event => {
+    event.custom({
+```
+at the very top of your script
+
+and then at the bottom add 
+
+```jsx title="code_Closer.js"
+
+    })
+})
+```
+
+and you will get 
+
+
+```jsx title="final_Code"
+ServerEvents.recipes(event => {
+    event.custom({
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "create:raw_zinc"
+  },
+  "result": "create:zinc_ingot",
+  "experience": 0.1,
+  "cookingtime": 100
+    })
+})
+```

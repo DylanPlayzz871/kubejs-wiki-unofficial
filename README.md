@@ -24,6 +24,14 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+## App downloads
+
+Place your Windows app's `.exe` in `static/downloads/`, keeping only one `.exe`
+in that folder. The filename can stay as-is. The `/downloads` page detects it
+when the site starts or builds and displays a download button; without a file,
+it displays "Coming soon". Restart the development server after adding or
+renaming the file. Rebuild and deploy to publish a new or updated download.
+
 ## Deployment
 
 Using SSH:
