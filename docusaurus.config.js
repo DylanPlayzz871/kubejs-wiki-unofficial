@@ -42,7 +42,7 @@ module.exports = {
       title: 'KubeJS Wiki Unofficial',
       logo: {
         alt: 'My KubeJS Logo',
-        src: 'img/logo.svg',
+        src: 'img/kubejs-logo.png',
       },
       items: [
         {
